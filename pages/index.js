@@ -9,7 +9,11 @@ import {
   FaLinux as Linux,
 } from "react-icons/fa";
 import { BsFillBootstrapFill as Bs } from "react-icons/bs";
-import { SiTailwindcss as Tailwind, SiNginx as Nginx } from "react-icons/si";
+import {
+  SiTailwindcss as Tailwind,
+  SiNginx as Nginx,
+  SiMysql as Mysql,
+} from "react-icons/si";
 
 const Home = () => {
   const [gitInfo, setGitInfo] = useState({});
@@ -41,9 +45,10 @@ const Home = () => {
         <h3 className="animate-fadeUp text-2xl text-center my-4">
           Fullstack Developer for the Oklahoma Department of Public Safety
         </h3>
-        <h3 className="w-64 mx-auto">
-          <div className="text-3xl text-center my-4 grid grid-cols-7 gap-4">
-            <FaReact /> <Js /> <Py /> <Bs /> <Tailwind /> <Linux /> <Nginx />
+        <h3 className="w-96 mx-auto">
+          <div className="text-3xl text-center my-4 grid grid-cols-8 gap-4">
+            <FaReact /> <Js /> <Py /> <Mysql /> <Bs /> <Tailwind /> <Linux />{" "}
+            <Nginx />
           </div>
         </h3>
         <div className="grid grid-cols-2 grid-flow-col gap-4">
