@@ -5,10 +5,15 @@ import {
   FaPython as Py,
   FaReact,
   FaJs as Js,
-  FaJenkins as Jenkins,
   FaLinux as Linux,
+  FaTiktok as Tiktok,
 } from "react-icons/fa";
-import { BsFillBootstrapFill as Bs } from "react-icons/bs";
+import { GoMail as Mail } from "react-icons/go";
+import {
+  BsFillBootstrapFill as Bs,
+  BsLinkedin as Ln,
+  BsGithub as Git,
+} from "react-icons/bs";
 import {
   SiTailwindcss as Tailwind,
   SiNginx as Nginx,
@@ -42,46 +47,35 @@ const Home = () => {
         <h1 className="animate-fadeUp text-6xl font-bold text-center my-4">
           Joseph Bouchard
         </h1>
-        <h3 className="animate-fadeUp text-2xl text-center my-4">
+        <h3 className="animate-fadeUp w-full mx-auto text-md text-center my-8">
+          <a className="mr-3" href="https://github.com/JoeBouchard">
+            <Git className="text-3xl mr-2 inline" />
+            @JoeBouchard
+          </a>
+          <a
+            className="mr-3"
+            href="https://www.linkedin.com/in/joseph-bouchard-oklahoma/"
+          >
+            <Ln className="text-3xl mr-2 inline" />
+            Joseph Bouchard
+          </a>
+          <a className="mr-3" href="mailto:joecbouchard@gmail.com">
+            <Mail className="text-3xl mr-2 inline" />
+            JoeCBouchard@gmail.com
+          </a>
+
+          <a className="mr-3" href="https://www.tiktok.com/@litelinguistics">
+            <Tiktok className="text-3xl mr-2 inline" />
+            @LiteLinguistics
+          </a>
+        </h3>
+        <h3 className="animate-fadeUp text-2xl text-center mb-6 mt-6">
           Fullstack Developer for the Oklahoma Department of Public Safety
         </h3>
-        <h3 className="w-96 mx-auto">
-          <div className="text-3xl text-center my-4 grid grid-cols-8 gap-4">
-            <FaReact /> <Js /> <Py /> <Mysql /> <Bs /> <Tailwind /> <Linux />{" "}
-            <Nginx />
-          </div>
+        <h3 className="w-48 mx-auto text-3xl text-center my-4 grid grid-cols-4 gap-4">
+          <FaReact /> <Js /> <Py /> <Mysql /> <Bs /> <Tailwind />{" "}
+          <Linux className="dark:bg-slate-300 text-zinc-900" /> <Nginx />
         </h3>
-        <div className="grid grid-cols-2 grid-flow-col gap-4">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <div className="card">
-            <h3>Projects &rarr;</h3>{" "}
-            <p>
-              <Link href="/projects/rims">Learn about Joe's projects!</Link>
-            </p>
-          </div>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
       </main>
     </div>
   );

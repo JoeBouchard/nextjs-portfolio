@@ -1,5 +1,8 @@
 import "../styles/globals.css";
 import { BsMoon as Moon, BsSun as Sun } from "react-icons/bs";
+import { TbBrandNextjs as Next } from "react-icons/tb";
+import { FaReact } from "react-icons/fa";
+import { SiTailwindcss as Tailwind, SiVercel as Vercel } from "react-icons/si";
 import React, { useEffect, useReducer } from "react";
 import Link from "next/link";
 
@@ -41,6 +44,19 @@ const MyApp = ({ Component, pageProps }) => {
         </nav>
       </header>
       <Component {...pageProps} />
+      <footer>
+        <nav className="text-md bg-white dark:bg-black p-1 grid grid-cols-3 gap-4 shadow-md w-full fixed bottom-0 text-center mt-20">
+          <h3 className="text-left">
+            &copy; Joseph Bouchard {new Date().getFullYear()}
+          </h3>
+          <h3 className="col-span-2 text-left">
+            Built with:{"  "}
+            <FaReact className="inline" /> React, <Next className="inline" />{" "}
+            NextJS, <Tailwind className="inline" /> Tailwind, and{" "}
+            <Vercel className="inline" /> Vercel
+          </h3>
+        </nav>
+      </footer>
     </div>
   );
 };
