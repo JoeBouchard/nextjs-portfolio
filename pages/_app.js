@@ -43,11 +43,10 @@ const MyApp = ({ Component, pageProps }) => {
       <Component {...pageProps} />
       <footer>
         <nav className="text-md bg-white dark:bg-black p-1 shadow-md w-full bottom-0 text-center mt-0">
-          <h3 className="text-center">
+          <h3 className="text-center ">
             Built with:{"  "}
             <FaReact className="inline" /> React, <Next className="inline" />{" "}
-            NextJS, <Tailwind className="inline" /> Tailwind, and{" "}
-            <Vercel className="inline" /> Vercel
+            NextJS, and <Tailwind className="inline" /> Tailwind
           </h3>
           <h3 className="my-1">
             &copy; Joseph Bouchard, {new Date().getFullYear()}
