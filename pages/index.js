@@ -21,7 +21,9 @@ import {
 } from "react-icons/si";
 
 const Home = () => {
-  const [gitInfo, setGitInfo] = useState({});
+  const [gitInfo, setGitInfo] = useState({
+    avatar_url: "https://avatars.githubusercontent.com/u/32207808?v=4",
+  });
   useEffect(() => {
     (async () => {
       const resp = await fetch("https://api.github.com/users/JoeBouchard");
@@ -79,6 +81,21 @@ const Home = () => {
           <FaReact /> <Js /> <Py /> <Mysql /> <Bs /> <Tailwind />{" "}
           <Linux className="dark:bg-slate-300 text-zinc-900" /> <Nginx />
         </h3>
+        <div className="grid grid-cols-2 my-10 ">
+          <Link href="education">
+            <div className="cursor-pointer p-5 border rounded-lg grow border-zinc-700 dark:border-zinc-300 border-3 hover:animate-grow mx-5">
+              <h3 className="text-2xl mr-3">Education:</h3> Computer Science
+              {" & "}
+              Linguistics from OU, 3.9 GPA <p className="mt-2">More...</p>
+            </div>
+          </Link>
+          <Link href="projects">
+            <div className="cursor-pointer p-5 border rounded-lg grow border-zinc-700 dark:border-zinc-300  hover:animate-grow border-3 mx-5">
+              <h3 className="text-2xl mr-3">Projects:</h3> Click to see my
+              projects
+            </div>
+          </Link>{" "}
+        </div>
       </main>
     </div>
   );
