@@ -18,10 +18,7 @@ const MyApp = ({ Component, pageProps }) => {
 
   return (
     <div
-      style={{
-        height: "100vh",
-      }}
-      className={`bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-slate-300`}
+      className={`bg-zinc-100 h-full dark:bg-zinc-900 text-zinc-700 dark:text-slate-300`}
     >
       <header className="mb-5">
         <nav className="navbar navbar-expand-lg shadow-md py-2 bg-white dark:bg-black items-center w-full justify-between">
@@ -45,15 +42,15 @@ const MyApp = ({ Component, pageProps }) => {
       </header>
       <Component {...pageProps} />
       <footer>
-        <nav className="text-md bg-white dark:bg-black p-1 grid grid-cols-3 gap-4 shadow-md w-full fixed bottom-0 text-center mt-20">
-          <h3 className="text-left">
-            &copy; Joseph Bouchard {new Date().getFullYear()}
-          </h3>
-          <h3 className="col-span-2 text-left">
+        <nav className="text-md bg-white dark:bg-black p-1 shadow-md w-full bottom-0 text-center mt-0">
+          <h3 className="text-center">
             Built with:{"  "}
             <FaReact className="inline" /> React, <Next className="inline" />{" "}
             NextJS, <Tailwind className="inline" /> Tailwind, and{" "}
             <Vercel className="inline" /> Vercel
+          </h3>
+          <h3 className="my-1">
+            &copy; Joseph Bouchard, {new Date().getFullYear()}
           </h3>
         </nav>
       </footer>
