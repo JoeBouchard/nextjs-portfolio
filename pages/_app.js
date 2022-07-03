@@ -18,7 +18,7 @@ const MyApp = ({ Component, pageProps }) => {
 
   return (
     <div
-      className={`bg-zinc-100 h-full dark:bg-zinc-900 text-zinc-700 dark:text-slate-300`}
+      className={`flex flex-col bg-zinc-100 h-full md:h-screen dark:bg-zinc-900 text-zinc-700 dark:text-slate-300`}
     >
       <header className="mb-5">
         <nav className="navbar navbar-expand-lg shadow-md py-2 bg-white dark:bg-black items-center w-full justify-between">
@@ -41,8 +41,8 @@ const MyApp = ({ Component, pageProps }) => {
         </nav>
       </header>
       <Component {...pageProps} />
-      <footer>
-        <nav className="text-md bg-white dark:bg-black p-1 shadow-md w-full bottom-0 text-center mt-0">
+      <footer className="flex flex-grow">
+        <nav className="text-md bg-white dark:bg-black p-1 shadow-md w-full h-fill bottom-0 text-center mt-0">
           <h3 className="text-center ">
             Built with:{"  "}
             <FaReact className="inline" /> React, <Next className="inline" />{" "}

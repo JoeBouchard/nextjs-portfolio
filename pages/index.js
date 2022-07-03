@@ -47,26 +47,29 @@ const Home = () => {
         <h1 className="animate-fadeUp text-6xl font-bold text-center my-4">
           Joseph Bouchard
         </h1>
-        <h3 className="animate-fadeUp w-full mx-auto text-md text-center my-8">
-          <a className="mr-3" href="https://github.com/JoeBouchard">
+        <h3 className="animate-fadeUp w-full mx-auto text-md text-center my-8 flex flex-wrap items-center">
+          <a
+            className="flex-auto"
+            href="https://www.tiktok.com/@litelinguistics"
+          >
+            <Tiktok className="text-3xl mr-2 inline" />
+            @LiteLinguistics
+          </a>
+          <a className="flex-auto" href="https://github.com/JoeBouchard">
             <Git className="text-3xl mr-2 inline" />
             @JoeBouchard
           </a>
+
+          <a className="flex-auto" href="mailto:joecbouchard@gmail.com">
+            <Mail className="text-3xl mr-2 inline" />
+            JoeCBouchard@gmail.com
+          </a>
           <a
-            className="mr-3"
+            className="flex-auto"
             href="https://www.linkedin.com/in/joseph-bouchard-oklahoma/"
           >
             <Ln className="text-3xl mr-2 inline" />
             Joseph Bouchard
-          </a>
-          <a className="mr-3" href="mailto:joecbouchard@gmail.com">
-            <Mail className="text-3xl mr-2 inline" />
-            JoeCBouchard@gmail.com
-          </a>
-
-          <a className="mr-3" href="https://www.tiktok.com/@litelinguistics">
-            <Tiktok className="text-3xl mr-2 inline" />
-            @LiteLinguistics
           </a>
         </h3>
         <h3 className="animate-fadeUp text-2xl text-center mb-6 mt-6">
