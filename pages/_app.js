@@ -5,7 +5,13 @@ import Footer from "../components/Footer";
 const MyApp = ({ Component, pageProps }) => {
   return (
     <div
-      className={`flex flex-col bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-slate-300`}
+      className={`
+      bg-fixed bg-center bg-cover 
+      flex flex-col 
+      bg-gradient-to-b 
+        from-slate-300 to-stone-300
+        dark:from-slate-800 dark:to-stone-700
+        text-zinc-600 dark:text-slate-200`}
     >
       <Header />
       <Component {...pageProps} />
