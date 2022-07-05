@@ -13,7 +13,7 @@ const Header = () => {
   }, [dark]);
 
   return (
-    <header className="mb-5">
+    <header className="mb-5 sticky top-0 z-50">
       <div className="flex shadow-md py-2 bg-white dark:bg-black items-center w-full">
         <button
           className="nav-item p-3 text-lg"
