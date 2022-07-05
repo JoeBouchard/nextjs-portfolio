@@ -8,8 +8,8 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        fadeUp: "fadeUp 0.5s cubic-bezier(.33,.88,.8,1.4)",
-        grow: "grow 0.125s cubic-bezier(.33,.88,.8,1.4) forwards",
+        fadeUp: "fadeUp 0.5s cubic-bezier(.19,1.06,.75,1.55)",
+        grow: "grow 0.25s cubic-bezier(.19,1.06,.75,1.55) forwards",
       },
       keyframes: {
         fadeUp: {
