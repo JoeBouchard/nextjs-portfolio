@@ -6,7 +6,6 @@ import {
   FaReact,
   FaJs as Js,
   FaLinux as Linux,
-  FaTiktok as Tiktok,
 } from "react-icons/fa";
 import { GoMail as Mail } from "react-icons/go";
 import {
@@ -19,6 +18,7 @@ import {
   SiNginx as Nginx,
   SiMysql as Mysql,
 } from "react-icons/si";
+import Badge from "../components/Badge";
 
 const Home = () => {
   const [gitInfo, setGitInfo] = useState({
@@ -50,36 +50,57 @@ const Home = () => {
           Joseph Bouchard
         </h1>
         <h3 className="animate-fadeUp w-full mx-auto text-md text-center my-8 flex flex-wrap items-center">
-          <a
-            className="flex-auto"
-            href="https://www.tiktok.com/@litelinguistics"
-          >
-            <Tiktok className="text-3xl mr-2 inline" />
-            @LiteLinguistics
-          </a>
           <a className="flex-auto" href="https://github.com/JoeBouchard">
-            <Git className="text-3xl mr-2 inline" />
-            @JoeBouchard
+            <Badge>
+              <Git className="text-3xl mr-2 inline text-black" />
+              @JoeBouchard
+            </Badge>
           </a>
-
           <a className="flex-auto" href="mailto:joecbouchard@gmail.com">
-            <Mail className="text-3xl mr-2 inline" />
-            JoeCBouchard@gmail.com
+            <Badge>
+              <Mail className="text-3xl mr-2 inline" />
+              JoeCBouchard@gmail.com
+            </Badge>
           </a>
           <a
             className="flex-auto"
             href="https://www.linkedin.com/in/joseph-bouchard-oklahoma/"
           >
-            <Ln className="text-3xl mr-2 inline" />
-            Joseph Bouchard
+            <Badge>
+              <Ln className="text-3xl mr-2 inline text-blue-900 bg-zinc-100 border border-zinc-100 rounded" />
+              Joseph Bouchard
+            </Badge>
           </a>
         </h3>
-        <h3 className="animate-fadeUp text-2xl text-center mb-6 mt-6">
+        <h3 className="animate-fadeUp text-2xl text-center mx-6">
           Fullstack Developer for the Oklahoma Department of Public Safety
         </h3>
-        <h3 className="w-48 mx-auto text-3xl text-center my-4 grid grid-cols-4 gap-4">
-          <FaReact /> <Js /> <Py /> <Mysql /> <Bs /> <Tailwind />{" "}
-          <Linux className="dark:bg-slate-300 text-zinc-900" /> <Nginx />
+        <h3 className="text-2xl text-center mt-6">Proficiencies:</h3>
+        <h3 className="mx-auto text-3xl mb-4 grid sm:grid-cols-4 grid-cols-2 px-5">
+          <Badge>
+            <FaReact className="inline" /> React
+          </Badge>
+          <Badge>
+            <Js className="inline" /> Javascript
+          </Badge>
+          <Badge>
+            <Py className="inline" /> Python
+          </Badge>
+          <Badge>
+            <Mysql className="inline" /> MySQL
+          </Badge>
+          <Badge>
+            <Bs className="inline" /> Bootstrap
+          </Badge>
+          <Badge>
+            <Tailwind className="inline" /> Tailwind
+          </Badge>
+          <Badge>
+            <Linux className="dark:bg-slate-300 text-zinc-900 inline" /> Linux
+          </Badge>
+          <Badge>
+            <Nginx className="inline" /> Nginx
+          </Badge>
         </h3>
         <div className="grid grid-cols-2 my-10 ">
           <Link href="education">
