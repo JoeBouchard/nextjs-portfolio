@@ -1,12 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import {
-  FaPython as Py,
-  FaReact,
-  FaJs as Js,
-  FaLinux as Linux,
-} from "react-icons/fa";
+import { FaReact, FaJs as Js, FaLinux as Linux } from "react-icons/fa";
 import { GoMail as Mail } from "react-icons/go";
 import {
   BsFillBootstrapFill as Bs,
@@ -19,6 +14,7 @@ import {
   SiMysql as Mysql,
 } from "react-icons/si";
 import Badge from "../components/Badge";
+import Py from "../public/images/python.svg";
 
 const Home = () => {
   const [gitInfo, setGitInfo] = useState({
@@ -78,28 +74,47 @@ const Home = () => {
         <h3 className="text-2xl text-center mt-6 font-bold">Proficiencies:</h3>
         <h3 className="mx-auto text-3xl mb-4 grid sm:grid-cols-4 grid-cols-2 px-5">
           <Badge>
-            <FaReact className="inline" /> React
+            <FaReact className="text-cyan-800 dark:text-cyan-300 inline text-3xl" />{" "}
+            React
           </Badge>
           <Badge>
-            <Js className="inline" /> Javascript
+            <Js className="text-yellow-800 dark:text-yellow-300 inline text-3xl" />{" "}
+            Javascript
           </Badge>
           <Badge>
-            <Py className="inline" /> Python
+            <img
+              src={"/images/python.svg"}
+              className="inline object-fit"
+              width="32"
+              height="32"
+            />{" "}
+            Python
           </Badge>
           <Badge>
-            <Mysql className="inline" /> MySQL
+            <img
+              src={"/images/mysql.svg"}
+              className="bg-slate-200 rounded inline object-fit"
+              width="36"
+              height="36"
+            />{" "}
+            MySQL
           </Badge>
           <Badge>
-            <Bs className="inline" /> Bootstrap
+            <Bs className=" text-purple-500 inline bg-white rounded" />{" "}
+            Bootstrap
           </Badge>
           <Badge>
-            <Tailwind className="inline" /> Tailwind
+            <Tailwind className="text-blue-400 inline" /> Tailwind
           </Badge>
           <Badge>
-            <Linux className="bg-slate-200 text-zinc-900 inline" /> Linux
+            <div className="bg-white inline p-1 pt-0 rounded">
+              <Linux className="text-black text-2xl inline" />
+            </div>{" "}
+            Linux
           </Badge>
           <Badge>
-            <Nginx className="inline" /> Nginx
+            <Nginx className="text-green-500 bg-white rounded-full text-3xl inline" />{" "}
+            Nginx
           </Badge>
         </h3>
         <div className="grid grid-cols-2 my-10 ">
