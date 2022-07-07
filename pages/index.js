@@ -69,7 +69,7 @@ const Home = () => {
           </a>
         </h3>
         <h3 className="animate-fadeUp text-2xl font-bold text-center mx-6">
-          Fullstack Developer for the Oklahoma Department of Public Safety
+          Fullstack Software Engineer
         </h3>
         <h3 className="text-2xl text-center mt-6 font-bold">Proficiencies:</h3>
         <h3 className="mx-auto text-3xl mb-4 grid sm:grid-cols-4 grid-cols-2 px-5">
