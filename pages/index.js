@@ -78,7 +78,7 @@ const Home = () => {
             React
           </Badge>
           <Badge>
-            <Js className="text-yellow-800 dark:text-yellow-300 inline text-3xl" />{" "}
+            <Js className="text-yellow-800 dark:text-yellow-300 inline md:text-3xl sm:text-xl" />{" "}
             Javascript
           </Badge>
           <Badge>
