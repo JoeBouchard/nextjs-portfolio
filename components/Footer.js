@@ -4,8 +4,8 @@ import { SiTailwindcss as Tailwind, SiVercel as Vercel } from "react-icons/si";
 
 const Footer = () => {
   return (
-    <footer className="flex flex-grow text-zinc-600 dark:text-gray-400 mt-5">
-      <nav className="text-md bg-white dark:bg-black p-1 shadow-md w-full h-fill bottom-0 text-center mt-0">
+    <footer className="flex flex-grow text-zinc-600 dark:text-gray-400 mt-5 h-fill">
+      <nav className="text-md bg-white dark:bg-black p-1 shadow-md w-full bottom-0 text-center mt-0">
         <h3 className="text-center ">
           Built with:{"  "}
           <FaReact className="inline" /> React, <Next className="inline" />{" "}

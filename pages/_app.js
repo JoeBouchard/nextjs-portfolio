@@ -12,9 +12,14 @@ const MyApp = ({ Component, pageProps }) => {
         from-slate-300 to-stone-300
         dark:from-slate-800 dark:to-stone-700
         text-zinc-600 dark:text-slate-200`}
+      style={{
+        height: "100%",
+      }}
     >
       <Header />
-      <Component {...pageProps} />
+      <div style={{ minHeight: "80vh" }}>
+        <Component {...pageProps} />
+      </div>
       <Footer />
     </div>
   );

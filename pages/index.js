@@ -14,7 +14,6 @@ import {
   SiMysql as Mysql,
 } from "react-icons/si";
 import Badge from "../components/Badge";
-import Py from "../public/images/python.svg";
 
 const Home = () => {
   const [gitInfo, setGitInfo] = useState({
@@ -48,7 +47,7 @@ const Home = () => {
         <h3 className="animate-fadeUp w-full mx-auto text-md text-center my-8 flex flex-wrap items-center">
           <a className="flex-auto" href="https://github.com/JoeBouchard">
             <Badge>
-              <Git className="text-3xl mr-2 inline text-black" />
+              <Git className="text-3xl mr-2 inline text-black bg-slate-100 rounded-full" />
               @JoeBouchard
             </Badge>
           </a>
