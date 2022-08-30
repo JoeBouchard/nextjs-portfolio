@@ -9,7 +9,7 @@ const Footer = () => {
         <h3 className="text-center ">
           Built with:{"  "}
           <FaReact className="inline" /> React, <Next className="inline" />{" "}
-          NextJS, and <Tailwind className="inline" /> Tailwind
+          NextJS, <Tailwind className="inline" /> Tailwind, and CSS Houdini
         </h3>
         <h3 className="my-1">
           &copy; Joseph Bouchard, {new Date().getFullYear()}

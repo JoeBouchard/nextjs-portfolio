@@ -6,10 +6,15 @@
     "start": "next start"
   },
   "dependencies": {
+    "css-paint-polyfill": "^3.4.0",
     "next": "latest",
+    "next-compose-plugins": "^2.2.1",
+    "next-with-polyfill": "^0.1.5",
+    "npm-check-updates": "^16.0.6",
+    "parallelowow": "^0.1.5",
     "prettier": "^2.7.1",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-icons": "^4.4.0"
   },
   "devDependencies": {

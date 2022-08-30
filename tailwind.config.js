@@ -15,7 +15,7 @@ module.exports = {
         fadeUp: {
           "0%": {
             transform: "scale(0.1, 0.1) translateY(50px)",
-            opacity: 0,
+            opacity: 0.5,
           },
           "100%": {
             transform: "scale(1, 1) translateY(0px)",

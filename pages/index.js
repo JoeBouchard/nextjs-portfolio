@@ -116,7 +116,10 @@ const Home = () => {
             Nginx
           </Badge>
         </h3>
-        <div className="grid grid-cols-2 my-10 ">
+        <div
+          className="grid grid-cols-2 my-10"
+          onMouseEnter={(e) => console.log(e)}
+        >
           <Link href="education">
             <div className="cursor-pointer p-5 border rounded-lg grow border-zinc-700 dark:border-zinc-300 border-3 hover:animate-grow mx-5">
               <h3 className="text-2xl mr-3">Education:</h3> Computer Science

@@ -7,7 +7,7 @@ const Education = () => {
         2021
       </h2>
       <div className="grid grid-cols-2 mt-10">
-        <div className="font-bold mx-3 p-2 border rounded-lg grow border-zinc-700 dark:border-zinc-300 border-3 ">
+        <div className="hover:animate-grow font-bold mx-3 p-2 border rounded-lg grow border-zinc-700 dark:border-zinc-300 border-3 ">
           <h3 className="text-2xl mt-3">
             Bachelor of Science in Computer Science
           </h3>
@@ -26,7 +26,7 @@ const Education = () => {
             <li>Data Structures</li>
           </ul>
         </div>
-        <div className="font-bold mx-3 p-2 border rounded-lg grow border-zinc-700 dark:border-zinc-300 border-3 ">
+        <div className="hover:animate-grow font-bold mx-3 p-2 border rounded-lg grow border-zinc-700 dark:border-zinc-300 border-3 ">
           <h3 className="text-2xl mt-3">Bachelor of Arts in Linguistics</h3>
           <div>Minor in Portuguese</div>
           <div className="mt-3">Graduated Summa Cum Laude</div>
