@@ -6,13 +6,13 @@ import { useEffect } from "react";
 
 const MyApp = ({ Component, pageProps }) => {
   useEffect(() => {
-    if (CSS.paintWorklet) {
+    if (CSS && CSS.paintWorklet) {
       console.log("Adding parallelowow", parallelowow);
       CSS.paintWorklet.addModule(
         "https://unpkg.com/parallelowow/parallelowow.js"
       );
     }
-  }, [CSS.paintWorklet]);
+  }, [CSS]);
   return (
     <>
       <script src="https://unpkg.com/css-paint-polyfill"></script>
