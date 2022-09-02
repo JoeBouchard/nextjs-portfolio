@@ -6,3 +6,14 @@
     height: fit-content;
     min-height: 100vh;
 }
+
+.four-line {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 6;
+    overflow: hidden;
+}
+
+.no-clamp {
+    -webkit-line-clamp: none;
+}
