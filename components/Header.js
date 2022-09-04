@@ -31,7 +31,7 @@ const Header = () => {
           <Link
             className="p-3 text-lg"
             id="navbarSupportedContentY"
-            href="projects"
+            href="/projects"
           >
             Projects
           </Link>
@@ -40,7 +40,7 @@ const Header = () => {
           <Link
             className="nav-item p-3 text-lg"
             id="navbarSupportedContentY"
-            href="education"
+            href="/education"
           >
             Education
           </Link>

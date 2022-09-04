@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Link from "next/link";
 
 const Projects = () => {
   const [selected, setSelected] = useState();
@@ -74,6 +75,16 @@ const Projects = () => {
           <h2 className="text-2xl font-bold ">
             Multi Application Geographic Information Center (MAGIC)
           </h2>
+          <Link href="/projects/weathermap">
+            <div
+              className="text-lg font-bold m-2 rounded"
+              style={{
+                border: "1px solid #eee",
+              }}
+            >
+              Partial, non-propriatary implementation
+            </div>
+          </Link>
           <div>
             <span>
               A system designed to monitor the status of various DPS and ODOT
