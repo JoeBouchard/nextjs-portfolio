@@ -159,7 +159,7 @@ const Mesonet = ({ precision }) => {
                   temperatureColors[
                     Math.min(
                       Math.max(-30, parseInt(site.site.temperature)),
-                      110
+                      109
                     ) + 30
                   ],
                 fillOpacity: 0.9,
