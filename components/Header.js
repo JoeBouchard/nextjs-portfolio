@@ -24,21 +24,21 @@ const Header = () => {
         >
           {dark ? <Sun className="text-white" /> : <Moon />}
         </button>
-        <div class="p-3 text-lg" id="navbarSupportedContentY">
+        <div className="p-3 text-lg" id="navbarSupportedContentY">
           <Link href="/">Home</Link>
         </div>
-        <div class="p-3 text-lg" id="navbarSupportedContentY">
+        <div className="p-3 text-lg" id="navbarSupportedContentY">
           <Link
-            class="p-3 text-lg"
+            className="p-3 text-lg"
             id="navbarSupportedContentY"
             href="projects"
           >
             Projects
           </Link>
         </div>
-        <div class="nav-item p-3 text-lg" id="navbarSupportedContentY">
+        <div className="nav-item p-3 text-lg" id="navbarSupportedContentY">
           <Link
-            class="nav-item p-3 text-lg"
+            className="nav-item p-3 text-lg"
             id="navbarSupportedContentY"
             href="education"
           >
