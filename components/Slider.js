@@ -21,7 +21,7 @@ const Slider = ({ min, max, val, setVal }) => (
       max={max}
       value={val}
       onChange={(e) => setVal(Math.max(min, Math.min(max, e.target.value)))}
-      class="slider"
+      style={{ width: "60%" }}
     />
     <button
       class="text-blue-500 hover:text-blue-700 bg-white font-bold"

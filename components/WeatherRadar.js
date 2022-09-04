@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { TileLayer } from "react-leaflet";
 
-const WeatherRadar = () => {
-  const [path, setPath] = useState();
+const WeatherRadar = ({ initPath }) => {
+  const [path, setPath] = useState(initPath);
 
   const updatePath = () => {
     fetch("https://api.rainviewer.com/public/weather-maps.json")

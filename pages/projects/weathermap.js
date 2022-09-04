@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-const MapDisp = () => {
+const MapDisp = ({ mesonet, rainPath }) => {
   const Map = dynamic(() => import("../../components/WeatherMap"), {
     ssr: false,
   });
@@ -11,7 +11,7 @@ const MapDisp = () => {
         width: "fit-content",
       }}
     >
-      <Map />
+      <Map mesonet={mesonet} rainPath={rainPath} />
     </div>
   );
 };

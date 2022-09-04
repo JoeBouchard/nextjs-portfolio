@@ -7,16 +7,28 @@ import { useEffect } from "react";
 const MyApp = ({ Component, pageProps }) => {
   useEffect(() => {
     let finished = false;
-    const i = setInterval(async () => {
-      if (CSS && CSS.paintWorklet && !finished) {
+    if (CSS && CSS.paintWorklet && !finished) {
+      try {
         console.log("Adding parallelowow", parallelowow);
-        CSS.paintWorklet.addModule(
-          "https://unpkg.com/parallelowow/parallelowow.js"
-        );
+        CSS.paintWorklet.addModule("/parallelowow.js");
         finished = true;
-        clearInterval(i);
+      } catch {
+        console.log("Unable to add parallelowow");
       }
-    }, 500);
+    } else {
+      const i = setInterval(() => {
+        if (CSS && CSS.paintWorklet && !finished) {
+          try {
+            console.log("Adding parallelowow", parallelowow);
+            CSS.paintWorklet.addModule("/parallelowow.js");
+            finished = true;
+            clearInterval(i);
+          } catch {
+            console.log("Unable to add paralellowow");
+          }
+        }
+      }, 500);
+    }
   }, []);
 
   return (

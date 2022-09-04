@@ -10,37 +10,40 @@ const temperatureColors = new Gradient()
 
 console.log(temperatureColors);
 
-const Mesonet = ({ precision }) => {
-  const [apiData, setApiData] = useState();
+const Mesonet = ({ precision, initData }) => {
+  const [apiData, setApiData] = useState(initData);
   const [cells, setCells] = useState();
   const map = useMap();
 
-  const loadData = () => {
+  const loadData = async () => {
     console.log("LEAFLETMAP", map);
-    fetch(
+    return fetch(
       "https://api.synopticdata.com/v2/stations/latest?token=96919cffd7774cf0b1047d33e05b349c&country=us&vars=air_temp&status=active"
     )
       .then((resp) => resp.json())
-      .then((data) =>
-        setApiData(
-          data.STATION.filter(
-            (s) =>
-              s.NAME !== "UNASSIGNED" &&
-              s.OBSERVATIONS &&
-              s.OBSERVATIONS.air_temp_value_1 &&
-              s.OBSERVATIONS.air_temp_value_1.value &&
-              new Date() - new Date(s.OBSERVATIONS.air_temp_value_1.date_time) <
-                1000 * 60 * 60
+      .then(
+        (data) =>
+          data.STATION &&
+          setApiData(
+            data.STATION.filter(
+              (s) =>
+                s.NAME !== "UNASSIGNED" &&
+                s.OBSERVATIONS &&
+                s.OBSERVATIONS.air_temp_value_1 &&
+                s.OBSERVATIONS.air_temp_value_1.value &&
+                new Date() -
+                  new Date(s.OBSERVATIONS.air_temp_value_1.date_time) <
+                  1000 * 60 * 60
+            )
           )
-        )
       );
   };
   useEffect(() => {
-    loadData();
+    if (!initData) loadData();
 
-    const i = setInterval(() => {
-      loadData();
-    }, 60 * 1000);
+    const i = setInterval(async () => {
+      await loadData();
+    }, 120 * 1000);
 
     return () => clearInterval(i);
   }, []);
@@ -167,6 +170,7 @@ const Mesonet = ({ precision }) => {
               key={site.site.voronoiId}
               positions={edgeObject}
               pane="tempmap"
+              className="temptriangle"
             >
               <Popup>
                 <p>{site.site.name}</p>
