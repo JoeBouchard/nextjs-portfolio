@@ -4,9 +4,30 @@ import Footer from "../components/Footer";
 import "parallelowow/parallelowow.js";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const MyApp = ({ Component, pageProps }) => {
   const { route } = useRouter();
+
+  //Register service worker
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/serviceworker.js").then(
+          (registration) => {
+            console.log(
+              "Service Worker registration successful with scope: ",
+              registration.scope
+            );
+          },
+          (err) => {
+            console.log("Service Worker registration failed: ", err);
+          }
+        );
+      });
+    }
+  }, []);
+
   useEffect(() => {
     let finished = false;
     if (CSS && CSS.paintWorklet && !finished) {
@@ -34,7 +55,15 @@ const MyApp = ({ Component, pageProps }) => {
   }, []);
 
   if (route.includes("webapps")) {
-    return <Component {...pageProps} />;
+    return (
+      <>
+        <Head>
+          <link rel="manifest" href="/manifest.json" />
+          <meta name="theme-color" content="#90cdf4" />
+        </Head>
+        <Component {...pageProps} />
+      </>
+    );
   }
   return (
     <>

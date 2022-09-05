@@ -1,0 +1,31 @@
+{
+    "short_name": "BWA",
+    "name": "Bouchard Web Apps",
+    "icons": [
+      {
+        "src": "/android-chrome-192x192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/android-chrome-512x512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": "/webapps",
+    "background_color": "#3367D6",
+    "display": "standalone",
+    "scope": "/webapps",
+    "theme_color": "#3367D6",
+    "shortcuts": [
+      {
+        "name": "Weather Map",
+        "short_name": "Weather",
+        "description": "View current temperature across the world",
+        "url": "/webapps/weathermap?source=pwa",
+        "icons": [{ "src": "/android-chrome-192x192.png", "sizes": "192x192" }]
+      }
+    ],
+    "description": "Joseph Bouchard's Miscellaneous Web Apps"
+  }
