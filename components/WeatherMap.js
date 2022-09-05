@@ -11,11 +11,12 @@ import {
 } from "react-icons/ri";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { useRouter } from "next/router";
+import Toggler from "./Toggler";
 
 const WeatherMap = () => {
   const [precision, setPrecision] = useState(20);
-  const [rainOpacity, setRainOpacity] = useState(90);
-  const [tempOpacity, setTempOpacity] = useState(90);
+  const [rainOpacity, setRainOpacity] = useState(100);
+  const [tempOpacity, setTempOpacity] = useState(100);
   const [warning, toggleWarning] = useReducer((w) => !w, true);
   const [mesonet, activateMesonet] = useReducer(() => true, false);
   const [slider, toggleSlider] = useReducer((s) => !s, true);
@@ -49,13 +50,13 @@ const WeatherMap = () => {
           left: slider ? "0" : "45vw",
           width: "100vw",
           display: "flex",
-          zIndex: 1000,
+          zIndex: 1002,
         }}
       >
         <div
           className={`mx-auto text-slate-800 font-bold bg-slate-200 rounded`}
           style={{
-            width: slider ? "80vw" : "fit-content",
+            width: slider ? "90vw" : "fit-content",
             display: "flex",
           }}
         >
@@ -69,7 +70,7 @@ const WeatherMap = () => {
               {(mesonet && (
                 <>
                   <p className="px-2">
-                    <p>Precision level: {(30 - precision) / 10}&deg;</p>
+                    <p>Polygon size: {precision}</p>
                     <Slider
                       min={5}
                       max={30}
@@ -77,17 +78,22 @@ const WeatherMap = () => {
                       setVal={setPrecision}
                     />
                   </p>
-                  <p>
+                  <p className="">
                     <p>
-                      {small ? "Temp layer" : "Temperature layer opacity:"}{" "}
-                      {tempOpacity}%
+                      {small
+                        ? "Temp layer"
+                        : `Temperature layer opacity: ${tempOpacity}%`}
                     </p>
-                    <Slider
-                      min={0}
-                      max={100}
-                      val={tempOpacity}
-                      setVal={setTempOpacity}
-                    />
+                    {small ? (
+                      <Toggler val={tempOpacity} setVal={setTempOpacity} />
+                    ) : (
+                      <Slider
+                        min={0}
+                        max={100}
+                        val={tempOpacity}
+                        setVal={setTempOpacity}
+                      />
+                    )}
                   </p>
                 </>
               )) || (
@@ -99,15 +105,17 @@ const WeatherMap = () => {
                 </>
               )}
               <p>
-                <p>
-                  Radar layer {!small && "opacity:"} {rainOpacity}%
-                </p>
-                <Slider
-                  min={0}
-                  max={100}
-                  val={rainOpacity}
-                  setVal={setRainOpacity}
-                />
+                <p>Radar layer {!small && `opacity: ${rainOpacity}%`}</p>
+                {small ? (
+                  <Toggler val={rainOpacity} setVal={setRainOpacity} />
+                ) : (
+                  <Slider
+                    min={0}
+                    max={100}
+                    val={rainOpacity}
+                    setVal={setRainOpacity}
+                  />
+                )}
               </p>
             </span>
           )}
@@ -122,7 +130,7 @@ const WeatherMap = () => {
           </button>
         </div>
       </div>
-      {precision > 20 && warning ? (
+      {precision < 10 && warning ? (
         <div
           style={{
             position: "fixed",
@@ -141,7 +149,7 @@ const WeatherMap = () => {
               flexGrow: 1,
             }}
           >
-            {"Warning: precision < 1"}&deg; will cause page to slow down
+            {"Warning: polygon size < 10"}&deg; may cause page to slow down
           </span>{" "}
           <button className="px-2" onClick={toggleWarning}>
             X
@@ -171,7 +179,7 @@ const WeatherMap = () => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <Pane className="tempmap" name="tempmap" />
-          <Mesonet precision={(30 - precision) / 10} />
+          <Mesonet precision={precision / 10} />
           <Pane name="radar" className="rainmap">
             <WeatherRadar />
           </Pane>
