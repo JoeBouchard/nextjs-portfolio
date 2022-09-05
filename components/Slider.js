@@ -10,7 +10,7 @@ const Slider = ({ min, max, val, setVal }) => {
   return (
     <>
       <button
-        class="text-blue-500 hover:text-blue-700 bg-white font-bold"
+        class="text-indigo-900 hover:text-blue-700 bg-white font-bold"
         onClick={() => setVal(Math.max(min, val - 1))}
         disabled={val === min}
         style={{
@@ -32,7 +32,7 @@ const Slider = ({ min, max, val, setVal }) => {
         />
       )}
       <button
-        class="text-blue-500 hover:text-blue-700 bg-white font-bold"
+        class="text-indigo-900 hover:text-blue-700 bg-white font-bold"
         onClick={() => setVal(Math.min(val + 1, max))}
         disabled={val === max}
         style={{
