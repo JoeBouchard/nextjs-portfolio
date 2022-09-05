@@ -18,7 +18,7 @@ const Mesonet = ({ precision, initData }) => {
   const loadData = async () => {
     console.log("LEAFLETMAP", map);
     return fetch(
-      "https://api.synopticdata.com/v2/stations/latest?token=96919cffd7774cf0b1047d33e05b349c&country=us&vars=air_temp&status=active"
+      "https://api.synopticdata.com/v2/stations/latest?token=96919cffd7774cf0b1047d33e05b349c&country=us,ca,mx&vars=air_temp&status=active&within=60"
     )
       .then((resp) => resp.json())
       .then(

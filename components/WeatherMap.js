@@ -5,17 +5,26 @@ import Mesonet from "./Mesonet";
 import { useEffect, useReducer, useState } from "react";
 import Slider from "./Slider";
 import { CircleLoader } from "react-spinners";
+import {
+  RiMenuFoldFill as MenuOpen,
+  RiMenuUnfoldFill as MenuClose,
+} from "react-icons/ri";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 
 const WeatherMap = () => {
   const [precision, setPrecision] = useState(20);
   const [rainOpacity, setRainOpacity] = useState(90);
   const [tempOpacity, setTempOpacity] = useState(90);
-  const [mesonet, activateMesonet] = useReducer((m) => true, false);
+  const [warning, toggleWarning] = useReducer((w) => !w, true);
+  const [mesonet, activateMesonet] = useReducer(() => true, false);
+  const [slider, toggleSlider] = useReducer((s) => !s, true);
+  const small = useMediaQuery(768);
 
   useEffect(() => {
     const i = setInterval(() => {
       if (document.getElementsByClassName("temptriangle").length > 0) {
         activateMesonet();
+        clearInterval(i);
       }
     }, 200);
   }, []);
@@ -35,68 +44,106 @@ const WeatherMap = () => {
         style={{
           position: "fixed",
           top: "12vh",
-          left: "0",
+          left: slider ? "0" : "45vw",
           width: "100vw",
+          display: "flex",
           zIndex: 1000,
         }}
       >
         <div
-          className="grid grid-cols-3 mx-auto text-slate-800 font-bold bg-slate-200 rounded"
+          className={`mx-auto text-slate-800 font-bold bg-slate-200 rounded`}
           style={{
-            width: "80vw",
+            width: slider ? "80vw" : "fit-content",
+            display: "flex",
           }}
         >
-          {mesonet ? (
-            <>
-              <p className="px-2">
-                <p>Precision level: {(30 - precision) / 10}&deg;</p>
-                <Slider
-                  min={5}
-                  max={30}
-                  val={precision}
-                  setVal={setPrecision}
-                />
-              </p>
+          {slider && (
+            <span
+              className="grid grid-cols-3"
+              style={{
+                flexGrow: 1,
+              }}
+            >
+              {(mesonet && (
+                <>
+                  <p className="px-2">
+                    <p>Precision level: {(30 - precision) / 10}&deg;</p>
+                    <Slider
+                      min={5}
+                      max={30}
+                      val={precision}
+                      setVal={setPrecision}
+                    />
+                  </p>
+                  <p>
+                    <p>
+                      {small ? "Temp layer" : "Temperature layer opacity:"}{" "}
+                      {tempOpacity}%
+                    </p>
+                    <Slider
+                      min={0}
+                      max={100}
+                      val={tempOpacity}
+                      setVal={setTempOpacity}
+                    />
+                  </p>
+                </>
+              )) || (
+                <>
+                  <div className="px-2">Loading temperature data...</div>
+                  <div className="pt-2">
+                    <CircleLoader size={50} />
+                  </div>
+                </>
+              )}
               <p>
-                <p>Temperature layer opacity: {tempOpacity}%</p>
+                <p>
+                  Radar layer {!small && "opacity:"} {rainOpacity}%
+                </p>
                 <Slider
                   min={0}
                   max={100}
-                  val={tempOpacity}
-                  setVal={setTempOpacity}
+                  val={rainOpacity}
+                  setVal={setRainOpacity}
                 />
               </p>
-            </>
-          ) : (
-            <>
-              <div className="px-2">Loading temperature data...</div>
-              <div className="pt-2">
-                <CircleLoader size={50} />
-              </div>
-            </>
+            </span>
           )}
-          <p>
-            <p>Radar layer opacity: {rainOpacity}%</p>
-            <Slider
-              min={0}
-              max={100}
-              val={rainOpacity}
-              setVal={setRainOpacity}
-            />
-          </p>
+          <button
+            className="p-3"
+            style={{
+              flexGrow: 0,
+            }}
+            onClick={toggleSlider}
+          >
+            {slider ? <MenuClose /> : <MenuOpen />}
+          </button>
         </div>
       </div>
-      {precision > 20 ? (
+      {precision > 20 && warning ? (
         <div
           style={{
             position: "fixed",
             bottom: "10vh",
             left: "5vw",
             zIndex: 1001,
+            display: "flex",
+            flexWrap: "nowrap",
+            maxWidth: "90vw",
           }}
           className="font-bold text-slate-200 bg-red-600 p-1"
         >
-          {"Warning: precision < 1"}&deg; will cause page to slow down
+          <span
+            className="px-3"
+            style={{
+              flexGrow: 1,
+            }}
+          >
+            {"Warning: precision < 1"}&deg; will cause page to slow down
+          </span>{" "}
+          <button className="px-2" onClick={toggleWarning}>
+            X
+          </button>
         </div>
       ) : (
         <></>
