@@ -3,8 +3,10 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "parallelowow/parallelowow.js";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const MyApp = ({ Component, pageProps }) => {
+  const { route } = useRouter();
   useEffect(() => {
     let finished = false;
     if (CSS && CSS.paintWorklet && !finished) {
@@ -31,6 +33,9 @@ const MyApp = ({ Component, pageProps }) => {
     }
   }, []);
 
+  if (route.includes("webapps")) {
+    return <Component {...pageProps} />;
+  }
   return (
     <>
       <script src="https://unpkg.com/css-paint-polyfill"></script>

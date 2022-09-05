@@ -10,6 +10,7 @@ import {
   RiMenuUnfoldFill as MenuClose,
 } from "react-icons/ri";
 import { useMediaQuery } from "../hooks/useMediaQuery";
+import { useRouter } from "next/router";
 
 const WeatherMap = () => {
   const [precision, setPrecision] = useState(20);
@@ -19,6 +20,7 @@ const WeatherMap = () => {
   const [mesonet, activateMesonet] = useReducer(() => true, false);
   const [slider, toggleSlider] = useReducer((s) => !s, true);
   const small = useMediaQuery(768);
+  const { route } = useRouter();
 
   useEffect(() => {
     const i = setInterval(() => {
@@ -34,7 +36,7 @@ const WeatherMap = () => {
       <style>{`
     .tempmap {
       opacity: ${tempOpacity / 100};
-      filter: blur(4px);
+      filter: blur(10px);
     }
     .rainmap {
       opacity: ${rainOpacity / 100}
@@ -43,7 +45,7 @@ const WeatherMap = () => {
       <div
         style={{
           position: "fixed",
-          top: "12vh",
+          top: route.includes("webapps") ? "5vh" : "12vh",
           left: slider ? "0" : "45vw",
           width: "100vw",
           display: "flex",
@@ -157,7 +159,11 @@ const WeatherMap = () => {
         <MapContainer
           center={[40, -100]}
           zoom={4}
-          style={{ height: "80vh", width: "90vw", zIndex: 2 }}
+          style={
+            route.includes("webapps")
+              ? { height: "100vh", width: "100vw" }
+              : { height: "80vh", width: "90vw", zIndex: 2 }
+          }
           className="mx-auto"
         >
           <TileLayer

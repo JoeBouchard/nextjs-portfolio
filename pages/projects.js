@@ -16,10 +16,11 @@ const Projects = () => {
           textOverflow: "ellipsis",
           transformOrigin: "0% 0%",
           cursor: "pointer",
+          height: "85%",
         }}
         className={`${
           selected === name ? "animate-expand" : "four-line"
-        } mx-3 p-2 border rounded-lg grow border-zinc-700 dark:border-zinc-300 border-3 `}
+        } m-3 p-2 border rounded-lg grow border-zinc-700 dark:border-zinc-300 border-3 `}
         onClick={() => setSelected(selected === name ? undefined : name)}
       >
         {children}
@@ -31,6 +32,19 @@ const Projects = () => {
     <div className="text-center">
       <h2 className="text-4xl my-2">Projects</h2>
       <div className={`${!selected && "grid grid-cols-2 "} mt-10`}>
+        <Link href="/projects/weathermap">
+          <a
+            style={{
+              height: "100%",
+            }}
+          >
+            <BoxStyle name="weathermap">
+              <h2 className="text-2xl font-bold ">Weathermap</h2>
+              <h4 className="p-2">A personal project</h4>
+              <div className="text-lg font-bold m-2 rounded">Click to view</div>
+            </BoxStyle>
+          </a>
+        </Link>
         <BoxStyle name="tascs">
           <h2 className="text-2xl font-bold ">
             Tickets And Service Center Systems (TASCS)
@@ -75,16 +89,6 @@ const Projects = () => {
           <h2 className="text-2xl font-bold ">
             Multi Application Geographic Information Center (MAGIC)
           </h2>
-          <Link href="/projects/weathermap">
-            <div
-              className="text-lg font-bold m-2 rounded"
-              style={{
-                border: "1px solid #eee",
-              }}
-            >
-              Partial, non-propriatary implementation
-            </div>
-          </Link>
           <div>
             <span>
               A system designed to monitor the status of various DPS and ODOT
