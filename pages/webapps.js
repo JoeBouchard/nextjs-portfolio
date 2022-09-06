@@ -14,7 +14,7 @@ const Webapps = () => {
     <div
       className="bg-fixed bg-center bg-cover 
       bg-gradient-to-b 
-        from-slate-800 to-stone-700 text-stone-300"
+        from-indigo-900 to-stone-700 text-stone-300"
       style={{
         width: "100vw",
         minHeight: "100vh",
@@ -27,7 +27,7 @@ const Webapps = () => {
       {webapps.map((w, k) => (
         <Link href={`/webapps/${w.link}`} key={k} id={k}>
           <div
-            className="animate-fadeUp mx-auto text-xl font-bold p-5 m-3 border rounded bg-indigo-900"
+            className="animate-fadeUp mx-auto text-xl font-bold p-5 m-3 border rounded bg-violet-900"
             style={{
               display: "flex",
               inlineSize: "fit-content",

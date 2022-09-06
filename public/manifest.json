@@ -14,10 +14,10 @@
       }
     ],
     "start_url": "/webapps",
-    "background_color": "#3367D6",
+    "background_color": "#312e81",
     "display": "standalone",
     "scope": "/webapps",
-    "theme_color": "#3367D6",
+    "theme_color": "#312e81",
     "shortcuts": [
       {
         "name": "Weather Map",
