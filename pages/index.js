@@ -8,11 +8,7 @@ import {
   BsLinkedin as Ln,
   BsGithub as Git,
 } from "react-icons/bs";
-import {
-  SiTailwindcss as Tailwind,
-  SiNginx as Nginx,
-  SiMysql as Mysql,
-} from "react-icons/si";
+import { SiTailwindcss as Tailwind, SiNginx as Nginx } from "react-icons/si";
 import Badge from "../components/Badge";
 
 const Home = () => {
@@ -129,8 +125,8 @@ const Home = () => {
           </Link>
           <Link href="projects">
             <div className="cursor-pointer p-5 border rounded-lg grow border-zinc-700 dark:border-zinc-300  hover:animate-grow border-3 mx-5">
-              <h3 className="text-2xl mr-3">Projects:</h3> Click to see my
-              projects
+              <h3 className="text-2xl mr-3">Projects:</h3>A collection of work
+              and personal projects. <p className="mt-2">Click to view</p>
             </div>
           </Link>{" "}
         </div>
