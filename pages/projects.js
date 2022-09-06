@@ -32,6 +32,19 @@ const Projects = () => {
     <div className="text-center">
       <h2 className="text-4xl my-2">Projects</h2>
       <div className={`${!selected && "grid grid-cols-2 "} mt-10`}>
+        <Link href="/webapps">
+          <a
+            style={{
+              height: "100%",
+            }}
+          >
+            <BoxStyle name="webapps">
+              <h2 className="text-2xl font-bold ">Webapps</h2>
+              <h4 className="p-2">A suite of personal Progressive Web Apps</h4>
+              <div className="text-lg font-bold m-2 rounded">Click to view</div>
+            </BoxStyle>
+          </a>
+        </Link>
         <Link href="/projects/weathermap">
           <a
             style={{
