@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import Toggler from "./Toggler";
 
 const WeatherMap = () => {
-  const [precision, setPrecision] = useState(20);
+  const [precision, setPrecision] = useState(10);
   const [rainOpacity, setRainOpacity] = useState(100);
   const [tempOpacity, setTempOpacity] = useState(100);
   const [warning, toggleWarning] = useReducer((w) => !w, true);
