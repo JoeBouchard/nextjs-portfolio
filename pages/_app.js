@@ -5,6 +5,9 @@ import "parallelowow/parallelowow.js";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import Link from "next/link";
+import { AiTwotoneHome as Home } from "react-icons/ai";
+import { IconContext } from "react-icons/lib";
 
 const MyApp = ({ Component, pageProps }) => {
   const { route } = useRouter();
@@ -59,19 +62,50 @@ const MyApp = ({ Component, pageProps }) => {
       <>
         <Head>
           <link rel="manifest" href="/manifest.json" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap"
+            rel="stylesheet"
+          />
           <meta name="theme-color" content="#90cdf4" />
         </Head>
         <Component {...pageProps} />
+        {route !== "/webapps" && (
+          <Link href="/webapps">
+            <a
+              style={{
+                position: "absolute",
+                bottom: "5vh",
+                right: "5px",
+                zIndex: 10000,
+              }}
+              className="text-stone-300 bg-indigo-900 p-1 rounded border"
+            >
+              <IconContext.Provider value={{ size: 28 }}>
+                <Home />
+              </IconContext.Provider>
+            </a>
+          </Link>
+        )}
       </>
     );
   }
   return (
     <>
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
       <script src="https://unpkg.com/css-paint-polyfill"></script>
       <div
         style={{
           height: "100vh",
-          width: "100vw",
+          width: "100%",
           zIndex: 1,
           position: "absolute",
           "--parallelowow-tile-width": 56,
@@ -96,7 +130,7 @@ const MyApp = ({ Component, pageProps }) => {
         dark:from-slate-800 dark:to-stone-700"
         style={{
           height: "100vh",
-          width: "100vw",
+          width: "100%",
           zIndex: 2,
           position: "absolute",
           top: 0,
@@ -114,7 +148,9 @@ const MyApp = ({ Component, pageProps }) => {
           zIndex: 3,
           background: undefined,
           height: "100vh",
-          overflow: "scroll",
+          width: "100%",
+          overflowY: "scroll",
+          overflowX: "hidden",
           position: "relative",
         }}
       >
