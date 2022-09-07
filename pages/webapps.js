@@ -1,5 +1,8 @@
 import Link from "next/link";
-import { BsThermometerSun as Weather } from "react-icons/bs";
+import {
+  BsThermometerSun as Weather,
+  BsPencilSquare as Pen,
+} from "react-icons/bs";
 
 const Webapps = () => {
   const webapps = [
@@ -7,6 +10,11 @@ const Webapps = () => {
       link: "weathermap",
       icon: <Weather />,
       description: "Weather Map",
+    },
+    {
+      link: "text-categorizer",
+      icon: <Pen />,
+      description: "Text Categorizer",
     },
   ];
 
@@ -27,16 +35,21 @@ const Webapps = () => {
       {webapps.map((w, k) => (
         <Link href={`/webapps/${w.link}`} key={k} id={k}>
           <div
-            className="animate-fadeUp mx-auto text-xl font-bold p-5 m-3 border rounded bg-violet-900"
+            className="animate-fadeUp text-center mx-auto text-xl font-bold p-5 m-3 border rounded bg-violet-900"
             style={{
               display: "flex",
               inlineSize: "fit-content",
               animationDelay: `${k / 5}s`,
+              width: "75vw",
+              cursor: "pointer",
             }}
           >
-            <span className="px-2" style={{ display: "inline" }}>
+            <div
+              className="px-2 text-centered"
+              style={{ display: "inline", flexGrow: 1 }}
+            >
               {w.description}
-            </span>
+            </div>
             {w.icon}
           </div>
         </Link>

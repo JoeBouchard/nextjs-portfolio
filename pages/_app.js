@@ -59,7 +59,16 @@ const MyApp = ({ Component, pageProps }) => {
 
   if (route.includes("webapps")) {
     return (
-      <>
+      <div
+        className="bg-fixed bg-center bg-cover 
+      bg-gradient-to-b 
+        from-indigo-900 to-slate-700 text-stone-100"
+        style={{
+          width: "100vw",
+          minHeight: "100vh",
+          height: "100%",
+        }}
+      >
         <Head>
           <link rel="manifest" href="/manifest.json" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -75,7 +84,7 @@ const MyApp = ({ Component, pageProps }) => {
           <Link href="/webapps">
             <a
               style={{
-                position: "absolute",
+                position: "fixed",
                 bottom: "5vh",
                 right: "5px",
                 zIndex: 10000,
@@ -88,7 +97,7 @@ const MyApp = ({ Component, pageProps }) => {
             </a>
           </Link>
         )}
-      </>
+      </div>
     );
   }
   return (

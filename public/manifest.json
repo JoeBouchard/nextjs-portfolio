@@ -1,5 +1,6 @@
 {
     "short_name": "BWA",
+    "id": "/webapps",
     "name": "Bouchard Web Apps",
     "icons": [
       {
