@@ -39,11 +39,15 @@ const TextCategorizer = () => {
           .split(/[^A-Za-z]/)
           .filter((val) => val.length > 0).length;
 
-        for (let i = 0; i <= l / 100000; i++) {
+        const readyArray = [];
+
+        for (let i = 0; i <= l / 10000; i++) {
           const f = new Worker(
             new URL("../../resources/frequencyWorker.js", import.meta.url)
           );
+          readyArray.push(false);
           f.onmessage = ({ data }) => {
+            if (data.loaded) readyArray[i] = true;
             if (typeof data.loading !== "undefined" || data.loaded) {
               setLoading(data.loading);
             } else {
@@ -61,12 +65,10 @@ const TextCategorizer = () => {
         );
         let count = 0;
         text.split("\n").forEach((t) => {
-          setTimeout(() => {
-            workerArray[count % workerArray.length].postMessage({
-              text: t,
-              id,
-            });
-          }, count * 10);
+          workerArray[count % workerArray.length].postMessage({
+            text: t,
+            id,
+          });
         });
       }
       setLoading();

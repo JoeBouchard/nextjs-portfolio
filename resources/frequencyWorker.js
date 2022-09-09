@@ -1,6 +1,8 @@
 import wordFreqs from "./wordFreqs.json";
 let headers = [...Object.keys(wordFreqs.a)];
 
+self.postMessage({ loaded: true });
+
 self.onmessage = ({ data: { text, id } }) => {
   self.postMessage({ loading: true, id });
   const split = text

@@ -17,6 +17,7 @@ const WeatherMap = () => {
   const [precision, setPrecision] = useState(10);
   const [rainOpacity, setRainOpacity] = useState(100);
   const [tempOpacity, setTempOpacity] = useState(100);
+  const [colorBy, setColorBy] = useState("temperature");
   const [warning, toggleWarning] = useReducer((w) => !w, true);
   const [mesonet, activateMesonet] = useReducer(() => true, false);
   const [slider, toggleSlider] = useReducer((s) => !s, true);
@@ -27,7 +28,6 @@ const WeatherMap = () => {
     const i = setInterval(() => {
       if (document.getElementsByClassName("temptriangle").length > 0) {
         activateMesonet();
-        clearInterval(i);
       }
     }, 200);
   }, []);
@@ -61,63 +61,74 @@ const WeatherMap = () => {
           }}
         >
           {slider && (
-            <span
-              className="grid grid-cols-3"
-              style={{
-                flexGrow: 1,
-              }}
-            >
-              {(mesonet && (
-                <>
-                  <p className="px-2">
-                    <p>Polygon size: {precision}</p>
-                    <Slider
-                      min={5}
-                      max={30}
-                      val={precision}
-                      setVal={setPrecision}
-                    />
-                  </p>
-                  <p className="">
-                    <p>
-                      {small
-                        ? "Temp layer"
-                        : `Temperature layer opacity: ${tempOpacity}%`}
-                    </p>
-                    {small ? (
-                      <Toggler val={tempOpacity} setVal={setTempOpacity} />
-                    ) : (
+            <>
+              <span
+                className="grid grid-cols-3"
+                style={{
+                  flexGrow: 1,
+                }}
+              >
+                {(mesonet && (
+                  <>
+                    <p className="px-2">
+                      <p>Polygon size: {precision}</p>
                       <Slider
-                        min={0}
-                        max={100}
-                        val={tempOpacity}
-                        setVal={setTempOpacity}
+                        min={1}
+                        max={30}
+                        val={precision}
+                        setVal={setPrecision}
                       />
-                    )}
-                  </p>
-                </>
-              )) || (
-                <>
-                  <div className="px-2">Loading temperature data...</div>
-                  <div className="pt-2">
-                    <CircleLoader size={50} />
-                  </div>
-                </>
-              )}
-              <p>
-                <p>Radar layer {!small && `opacity: ${rainOpacity}%`}</p>
-                {small ? (
-                  <Toggler val={rainOpacity} setVal={setRainOpacity} />
-                ) : (
-                  <Slider
-                    min={0}
-                    max={100}
-                    val={rainOpacity}
-                    setVal={setRainOpacity}
-                  />
+                    </p>
+                    <p className="">
+                      <p>
+                        {small
+                          ? "Weather layer"
+                          : `${colorBy} layer opacity: ${tempOpacity}%`}
+                      </p>
+                      {small ? (
+                        <Toggler val={tempOpacity} setVal={setTempOpacity} />
+                      ) : (
+                        <Slider
+                          min={0}
+                          max={100}
+                          val={tempOpacity}
+                          setVal={setTempOpacity}
+                        />
+                      )}
+                    </p>
+                  </>
+                )) || (
+                  <>
+                    <div className="px-2">Loading temperature data...</div>
+                    <div className="pt-2">
+                      <CircleLoader size={50} />
+                    </div>
+                  </>
                 )}
-              </p>
-            </span>
+                <p>
+                  <p>Radar layer {!small && `opacity: ${rainOpacity}%`}</p>
+                  {small ? (
+                    <Toggler val={rainOpacity} setVal={setRainOpacity} />
+                  ) : (
+                    <Slider
+                      min={0}
+                      max={100}
+                      val={rainOpacity}
+                      setVal={setRainOpacity}
+                    />
+                  )}
+                </p>
+                <div></div>
+                <select
+                  className="mb-2 text-stone-900"
+                  value={colorBy}
+                  onChange={(e) => setColorBy(e.target.value)}
+                >
+                  <option value="temperature">Temperature</option>
+                  <option value="humidity">Humidity</option>
+                </select>
+              </span>
+            </>
           )}
           <button
             className="p-3"
@@ -149,7 +160,7 @@ const WeatherMap = () => {
               flexGrow: 1,
             }}
           >
-            {"Warning: polygon size < 10"}&deg; may cause page to slow down
+            {"Warning: polygon size < 10"} may cause page to slow down
           </span>{" "}
           <button className="px-2" onClick={toggleWarning}>
             X
@@ -179,7 +190,7 @@ const WeatherMap = () => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <Pane className="tempmap" name="tempmap" />
-          <Mesonet precision={precision / 10} />
+          <Mesonet precision={precision / 10} colorBy={colorBy} />
           <Pane name="radar" className="rainmap">
             <WeatherRadar />
           </Pane>

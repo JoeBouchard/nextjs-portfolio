@@ -1,24 +1,44 @@
 import { useEffect, useState } from "react";
-import { Polygon, Popup, useMap, Pane } from "react-leaflet";
+import { Polygon, Popup, useMap } from "react-leaflet";
 import Gradient from "javascript-color-gradient";
-import Voronoi from "voronoi";
 
 const temperatureColors = new Gradient()
   .setColorGradient("#dd22dd", "2222dd", "22dddd", "22dd22", "dddd22", "dd2222")
   .setMidpoint(140)
   .getColors();
 
-console.log(temperatureColors);
+const humidityColors = new Gradient()
+  .setColorGradient("#dd2222", "dd2222", "dddd22", "22dd22", "2222dd")
+  .setMidpoint(101)
+  .getColors();
 
-const Mesonet = ({ precision, initData }) => {
+const rainColors = new Gradient()
+  .setColorGradient("#dd2222", "22dd22", "2222dd")
+  .setMidpoint(1000)
+  .getColors();
+
+const getColor = (site, colorBy) => {
+  if (colorBy === "humidity") {
+    return humidityColors[parseInt(site.site.humidity)];
+  }
+  if (colorBy === "rain") {
+    return rainColors[Math.min(parseInt(site.site.rain), 999)];
+  }
+  return temperatureColors[
+    Math.min(Math.max(-30, parseInt(site.site.temperature)), 109) + 30
+  ];
+};
+
+const Mesonet = ({ precision, initData, colorBy }) => {
   const [apiData, setApiData] = useState(initData);
   const [cells, setCells] = useState();
+  const [loading, setLoading] = useState(false);
   const map = useMap();
 
   const loadData = async () => {
     console.log("LEAFLETMAP", map);
     return fetch(
-      "https://api.synopticdata.com/v2/stations/latest?token=96919cffd7774cf0b1047d33e05b349c&country=us,ca,mx&vars=air_temp&status=active&within=60"
+      "https://api.synopticdata.com/v2/stations/latest?token=96919cffd7774cf0b1047d33e05b349c&country=us,ca,mx&vars=air_temp,relative_humidity&status=active&within=60"
     )
       .then((resp) => resp.json())
       .then(
@@ -31,6 +51,8 @@ const Mesonet = ({ precision, initData }) => {
                 s.OBSERVATIONS &&
                 s.OBSERVATIONS.air_temp_value_1 &&
                 s.OBSERVATIONS.air_temp_value_1.value &&
+                s.OBSERVATIONS.relative_humidity_value_1 &&
+                s.OBSERVATIONS.relative_humidity_value_1.value &&
                 new Date() -
                   new Date(s.OBSERVATIONS.air_temp_value_1.date_time) <
                   1000 * 60 * 60
@@ -43,59 +65,35 @@ const Mesonet = ({ precision, initData }) => {
 
     const i = setInterval(async () => {
       await loadData();
-    }, 120 * 1000);
+    }, 600 * 1000);
 
     return () => clearInterval(i);
   }, []);
 
   useEffect(() => {
     if (apiData) {
-      const data = apiData.reduce((state, val) => {
-        if (
-          state.filter(
-            (s) =>
-              Math.abs(s.LATITUDE - val.LATITUDE) < precision &&
-              Math.abs(s.LONGITUDE - val.LONGITUDE) < precision
-          ).length > 0
-        ) {
-          return state;
-        }
-        return [...state, val];
-      }, []);
-      const voronoi = new Voronoi();
-      if (cells) {
-        voronoi.recycle(cells);
-      }
-      const sites = data.map((site) => ({
-        x: parseFloat(site.LONGITUDE),
-        y: parseFloat(site.LATITUDE),
-        name: site.NAME,
-        date: site.OBSERVATIONS.air_temp_value_1.date_time,
-        temperature: (site.OBSERVATIONS.air_temp_value_1.value * 9) / 5 + 32,
-      }));
-
-      const bbox = sites.reduce(
-        (state, val) => {
-          return {
-            xl: Math.min(state.xl, parseFloat(val.x) - 1),
-            xr: Math.max(state.xr, parseFloat(val.x) + 1),
-            yt: Math.min(state.yt, parseFloat(val.y) - 1),
-            yb: Math.max(state.yb, parseFloat(val.y) + 1),
-          };
-        },
-        { xl: 0, xr: 0, yt: 0, yb: 0 }
+      console.log(apiData.length);
+      const worker = new Worker(
+        new URL("../resources/voronoiWorker.js", import.meta.url)
       );
-
-      console.log(sites, bbox);
-      const diagram = voronoi.compute(sites, bbox);
-      console.log(diagram);
-      setCells(diagram);
+      worker.onmessage = ({ data }) => {
+        setLoading(false);
+        setCells(data);
+      };
+      worker.postMessage({ apiData, precision });
+      return () => worker.terminate();
     }
+    return () => {};
   }, [apiData, precision]);
+
+  useEffect(() => {
+    setLoading(true);
+  }, [precision]);
 
   return (
     <>
       {cells &&
+        !loading &&
         cells.cells.map((site) => {
           const edgeObject = site.halfedges
             .map(
@@ -158,13 +156,7 @@ const Mesonet = ({ precision, initData }) => {
             <Polygon
               pathOptions={{
                 color: "none",
-                fillColor:
-                  temperatureColors[
-                    Math.min(
-                      Math.max(-30, parseInt(site.site.temperature)),
-                      109
-                    ) + 30
-                  ],
+                fillColor: getColor(site, colorBy),
                 fillOpacity: 0.9,
               }}
               key={site.site.voronoiId}
@@ -175,6 +167,7 @@ const Mesonet = ({ precision, initData }) => {
               <Popup>
                 <p>{site.site.name}</p>
                 <p>{Math.round(site.site.temperature * 100) / 100}&deg; F</p>
+                <p>{parseInt(site.site.humidity)}% humidity</p>
                 <p>{new Date(site.site.date).toLocaleString()}</p>
               </Popup>
             </Polygon>
