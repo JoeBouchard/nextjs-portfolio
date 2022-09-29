@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
 import { Polygon, Popup, useMap } from "react-leaflet";
 import Gradient from "javascript-color-gradient";
 
@@ -31,8 +31,7 @@ const getColor = (site, colorBy) => {
 
 const Mesonet = ({ precision, initData, colorBy }) => {
   const [apiData, setApiData] = useState(initData);
-  const [cells, setCells] = useState();
-  const [loading, setLoading] = useState(false);
+  const [cells, setCells] = useState({});
   const map = useMap();
 
   const loadData = async () => {
@@ -73,27 +72,22 @@ const Mesonet = ({ precision, initData, colorBy }) => {
   useEffect(() => {
     if (apiData) {
       console.log(apiData.length);
+
       const worker = new Worker(
         new URL("../resources/voronoiWorker.js", import.meta.url)
       );
       worker.onmessage = ({ data }) => {
-        setLoading(false);
-        setCells(data);
+        setCells(data.voronoi);
+        console.log(data.voronoi.cells.length);
+        worker.terminate();
       };
       worker.postMessage({ apiData, precision });
-      return () => worker.terminate();
     }
-    return () => {};
   }, [apiData, precision]);
-
-  useEffect(() => {
-    setLoading(true);
-  }, [precision]);
 
   return (
     <>
-      {cells &&
-        !loading &&
+      {cells.cells &&
         cells.cells.map((site) => {
           const edgeObject = site.halfedges
             .map(
@@ -107,40 +101,34 @@ const Mesonet = ({ precision, initData, colorBy }) => {
                 ]
             )
             .reduce((state, val) => {
+              const p = precision;
+
               if (!val) return state;
-              if (
-                Math.abs(site.site.y - val[0]) > Math.max(precision * 1.5, 1)
-              ) {
+              if (Math.abs(site.site.y - val[0]) > Math.max(p * 1.5, 1)) {
                 val[0] =
                   site.site.y - val[0] > 0
-                    ? site.site.y - Math.max(precision * 1.5, 1)
-                    : site.site.y + Math.max(precision * 1.5, 1);
+                    ? site.site.y - Math.max(p * 1.5, 1)
+                    : site.site.y + Math.max(p * 1.5, 1);
               }
 
-              if (
-                Math.abs(site.site.x - val[1]) > Math.max(precision * 1.5, 1)
-              ) {
+              if (Math.abs(site.site.x - val[1]) > Math.max(p * 1.5, 1)) {
                 val[1] =
                   site.site.x - val[1] > 0
-                    ? site.site.x - Math.max(precision * 1.5, 1)
-                    : site.site.x + Math.max(precision * 1.5, 1);
+                    ? site.site.x - Math.max(p * 1.5, 1)
+                    : site.site.x + Math.max(p * 1.5, 1);
               }
-              if (
-                Math.abs(site.site.y - val[2]) > Math.max(precision * 1.5, 1)
-              ) {
+              if (Math.abs(site.site.y - val[2]) > Math.max(p * 1.5, 1)) {
                 val[2] =
                   site.site.y - val[2] > 0
-                    ? site.site.y - Math.max(precision * 1.5, 1)
-                    : site.site.y + Math.max(precision * 1.5, 1);
+                    ? site.site.y - Math.max(p * 1.5, 1)
+                    : site.site.y + Math.max(p * 1.5, 1);
               }
 
-              if (
-                Math.abs(site.site.x - val[3]) > Math.max(precision * 1.5, 1)
-              ) {
+              if (Math.abs(site.site.x - val[3]) > Math.max(p * 1.5, 1)) {
                 val[3] =
                   site.site.x - val[3] > 0
-                    ? site.site.x - Math.max(precision * 1.5, 1)
-                    : site.site.x + Math.max(precision * 1.5, 1);
+                    ? site.site.x - Math.max(p * 1.5, 1)
+                    : site.site.x + Math.max(p * 1.5, 1);
               }
               return [
                 ...state,
