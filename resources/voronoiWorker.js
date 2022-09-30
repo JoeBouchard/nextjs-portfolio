@@ -4,18 +4,15 @@ self.onmessage = ({ data: { apiData, precision } }) => {
   const d = new Date();
   console.log(`step 1 for ${precision} at ${parseInt(new Date() - d)}`);
   const data = apiData.reduce((state, val) => {
-    let found = false;
-    for (const v of state) {
-      found =
+    const found = state.findIndex(
+      (v) =>
         Math.abs(v.LATITUDE - val.LATITUDE) < precision &&
         Math.abs(v.LONGITUDE - val.LONGITUDE) < precision &&
         Math.abs(v.LATITUDE - val.LATITUDE) > 0.00001 &&
-        Math.abs(v.LONGITUDE - val.LONGITUDE) > 0.00001;
-      if (found) {
-        break;
-      }
-    }
-    if (found) return state;
+        Math.abs(v.LONGITUDE - val.LONGITUDE) > 0.00001
+    );
+
+    if (found > 0) return state;
     return [...state, val];
   }, []);
   // .sort((a, b) => {
