@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <script src="https://apis.google.com/js/api.js"></script>
+<script>
+  function oauthSignIn() {
+  // Google's OAuth 2.0 endpoint for requesting an access token
+  var oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
+
+  // Create <form> element to submit parameters to OAuth 2.0 endpoint.
+  var form = document.createElement('form');
+  form.setAttribute('method', 'GET'); // Send as a GET request.
+  form.setAttribute('action', oauth2Endpoint);
+
+  // Parameters to pass to OAuth 2.0 endpoint.
+  var params = {'clientId': '211760086980-mq09m2i09r8r98d8ndarh2c4odjgb299.apps.googleusercontent.com',
+                'redirect_uri': 'http://localhost:3000',
+                'response_type': 'token',
+                'scope': 'https://www.googleapis.com/auth/youtube.force-ssl',
+                'include_granted_scopes': 'true',
+                'state': 'pass-through value'};
+
+  // Add form parameters as hidden input values.
+  for (var p in params) {
+    var input = document.createElement('input');
+    input.setAttribute('type', 'hidden');
+    input.setAttribute('name', p);
+    input.setAttribute('value', params[p]);
+    form.appendChild(input);
+  }
+
+  // Add form to page and submit it to open the OAuth 2.0 endpoint.
+  document.body.appendChild(form);
+  form.submit();
+}
+function start() {
+  var GoogleAuth;
+  // 2. Initialize the JavaScript client library.
+  gapi.client.init({
+    'apiKey': 'AIzaSyD8wC3CF4lyJGlNe5p-l_HYD_FxsSZii7Y',
+    // Your API key will be automatically added to the Discovery Document URLs.
+    'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest'],
+    // clientId and scope are optional if auth is not required.
+    'clientId': '211760086980-mq09m2i09r8r98d8ndarh2c4odjgb299.apps.googleusercontent.com',
+    'scope': 'profile',
+  }).then(function () {
+      GoogleAuth = gapi.auth2.getAuthInstance();
+
+      // Listen for sign-in state changes.
+      GoogleAuth.isSignedIn.listen(updateSigninStatus);
+  });
+};
+// 1. Load the JavaScript client library.
+gapi.load('client', start);
+</script>
+  </head>
+  <body>
+    <div id="results"></div>
+  </body>
+</html>

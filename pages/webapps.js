@@ -3,6 +3,7 @@ import {
   BsThermometerSun as Weather,
   BsPencilSquare as Pen,
 } from "react-icons/bs";
+import { MdOutlineColorLens as Color } from "react-icons/md";
 
 const Webapps = () => {
   const webapps = [
@@ -15,6 +16,11 @@ const Webapps = () => {
       link: "text-categorizer",
       icon: <Pen />,
       description: "Text Categorizer",
+    },
+    {
+      link: "hexel",
+      icon: <Color />,
+      description: "Hexel: the color guessing game",
     },
   ];
 
