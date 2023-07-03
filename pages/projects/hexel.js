@@ -200,10 +200,7 @@ const Hexel = ({ color }) => {
         </div>
       </div>
       <div style={{ color: opposite, textAlign: "center", marginTop: 48 }}>
-        Guess the hex code of the mystey color on the right!
-        <br />
-        You can drag your guess over the color sample on the right to compare
-        the colors.
+        Guess the hex code of the mystery color on the right!
         <br />
         You can also change the background color from white to black.
         <br />
