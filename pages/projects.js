@@ -32,6 +32,32 @@ const Projects = () => {
     <div className="text-center">
       <h2 className="text-4xl my-2">Projects</h2>
       <div className={`${!selected && "grid grid-cols-2 "} mt-10`}>
+        <Link href="/projects/hexel">
+          <a
+            style={{
+              height: "100%",
+            }}
+          >
+            <BoxStyle name="hexel">
+              <h2 className="text-2xl font-bold ">Hexel</h2>
+              <h4 className="p-2">A hex code color guessing game</h4>
+              <div className="text-lg font-bold m-2 rounded">Click to view</div>
+            </BoxStyle>
+          </a>
+        </Link>
+        <a
+          style={{
+            height: "100%",
+          }}
+          href="https://chorals.io"
+          target="_blank"
+        >
+          <BoxStyle name="chorals">
+            <h2 className="text-2xl font-bold ">Chorals</h2>
+            <h4 className="p-2">A song lyric guessing game</h4>
+            <div className="text-lg font-bold m-2 rounded">Click to view</div>
+          </BoxStyle>
+        </a>
         <Link href="/webapps">
           <a
             style={{

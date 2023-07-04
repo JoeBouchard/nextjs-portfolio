@@ -5,6 +5,10 @@ import { BsFillInfoSquareFill as Info } from "react-icons/bs";
 import { IconContext } from "react-icons/lib";
 import { AiFillCloseSquare as Close } from "react-icons/ai";
 
+const syllableCounter =
+  /([aeiouyAEIOUY]+[^e.\s])|([aiouyAEIOUY]+\b)|(\b[^aeiouy0-9.']+e\b)/gim;
+//  /([e]+[^sd\W][^e]|[e]+\w{2}|[aiouy]+|\W[^aeiou]+[e]\W)/g;
+
 const TextCategorizer = () => {
   const [info, showInfo] = useReducer((i) => !i, false);
   const [text, setText] = useState("");
@@ -76,6 +80,17 @@ const TextCategorizer = () => {
     return () => workerArray.forEach((w) => w.terminate());
   }, [text]);
 
+  const l = text.replaceAll(/[^A-Za-z \n]/gi, "");
+
+  let fcValue = 0;
+  let fcGrade = 0;
+  if (length && text) {
+    const wordsPerSentence = length / (text.match(/[\.\?\!]/g) || " ").length;
+    const syllablesPerWord =
+      ((text.match(syllableCounter) || " ").length * 0.98) / length;
+    fcValue = 206.835 - 1.015 * wordsPerSentence - 84.6 * syllablesPerWord;
+    fcGrade = 0.39 * wordsPerSentence + 11.8 * syllablesPerWord - 15.59;
+  }
   return (
     <>
       <div id="loading-message" />
@@ -178,6 +193,8 @@ const TextCategorizer = () => {
           </table>
         )}
       </div>
+      <div>Flesch-Kincaid score: {fcValue}</div>
+      <div>Flesch-Kincaid grade level: {fcGrade}</div>
     </>
   );
 };
