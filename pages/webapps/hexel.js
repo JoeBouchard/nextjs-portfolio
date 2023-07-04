@@ -6,9 +6,11 @@ const HexApp = ({ color }) => (
   </div>
 );
 
+export default HexApp;
+
 export const getServerSideProps = () => {
-  const color = Math.floor(Math.random() * 16777215).toString(16);
+  let color = Math.floor(Math.random() * 16777215).toString(16);
+  while (color.length < 6) color = "0" + color;
   // Pass data to the page via props
   return { props: { color } };
 };
-export default HexApp;

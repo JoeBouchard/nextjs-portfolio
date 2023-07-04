@@ -9,11 +9,11 @@ const Hexel = ({ color }) => {
 
   if (
     guesses[0].toLowerCase().includes(color.toLowerCase()) &&
-    bgColor !== "green"
+    bgColor !== "#aaddaa"
   )
-    setBgColor("green");
+    setBgColor("#aaddaa");
 
-  const opposite = bgColor !== "white" ? "white" : "black";
+  const opposite = bgColor !== "black" ? "black" : "white";
 
   return (
     <div
@@ -202,6 +202,13 @@ const Hexel = ({ color }) => {
       <div style={{ color: opposite, textAlign: "center", marginTop: 48 }}>
         Guess the hex code of the mystery color on the right!
         <br />
+        In your guess history, a green section indicates that it is closer than
+        your previous guess.
+        <br />
+        Red indicates that it's farther away
+        <br />
+        Bold green text means you've got that color right!
+        <br />
         You can also change the background color from white to black.
         <br />
         Best of luck!
@@ -213,7 +220,8 @@ const Hexel = ({ color }) => {
 export default Hexel;
 
 export const getServerSideProps = () => {
-  const color = Math.floor(Math.random() * 16777215).toString(16);
+  let color = Math.floor(Math.random() * 16777215).toString(16);
+  while (color.length < 6) color = "0" + color;
   // Pass data to the page via props
   return { props: { color } };
 };
